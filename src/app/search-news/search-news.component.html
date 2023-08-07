@@ -1,0 +1,44 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Teste de homologacao</li>
+  </ol>
+</nav>
+
+<form class="container" [formGroup]="formData" (ngSubmit)="search(formData.value)">
+  <input class="input" type="text" name="valorPesquisa" placeholder="Ex: clima hoje, dólar" formControlName="valorPesquisa">
+  <input type="submit" class="ml-2 btn btn-primary btn-add-car butt" value="Pesquisar">
+</form>
+
+<div class="container">
+  <div class="card list-car">
+    <h3 class="card-header">Resultado da pesquisa</h3>
+    <div class="card-body">
+      <table class="table" *ngIf="pesquisa != undefined && pesquisa.articles.length > 0">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let article of pesquisa.articles">
+            <td>{{article.source.id}}</td>
+            <td>{{article.source.name}}</td>
+            <td>{{article.author}}</td>
+            <td>{{article.title}}</td>
+            <td>{{article.description}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <span *ngIf="pesquisa == undefined || pesquisa.articles.length == 0">Não foi encontrado nada.</span>
+    </div>
+  </div>
+
+  <div class="flex-container-center">
+    <button type="button" class="btn btn-primary btn-add-car butt" (click)="backPage()">&lt; Página anterior</button>
+    <button type="button" class="btn btn-primary btn-add-car butt" (click)="nextPage()">Página seguinte &gt;</button>
+  </div>
+</div>
